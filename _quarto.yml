@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: docs
+  preview: 
+    port: 5556
+    browser: true
+    watch-inputs: true
+    navigate: true
+
+website:
+  title: "Quarto Research Blog"
+  favicon: favicon.svg
+  navbar:
+    right:
+      - icon: github
+        href: https://github.com/kazuyanagimoto/quarto-research-blog
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
