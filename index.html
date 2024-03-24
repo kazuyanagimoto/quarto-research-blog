@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -196,10 +196,10 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="descriptive,traffic accidents" data-listing-date-sort="1711234800000" data-listing-file-modified-sort="1711313132763" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="468">
+<div class="quarto-post image-right" data-index="0" data-categories="descriptive,traffic accidents" data-listing-date-sort="1711238400000" data-listing-file-modified-sort="1711316917436" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="468">
 <div class="thumbnail">
 <p><a href="./posts/240324_accident_bike/index.html" class="no-external"></a></p><a href="./posts/240324_accident_bike/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\240324_accident_bike\index_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts/240324_accident_bike/index_files/figure-html/unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
 </a><p><a href="./posts/240324_accident_bike/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -232,10 +232,10 @@ Kazuharu Yanagimoto
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="model" data-listing-date-sort="1710975600000" data-listing-file-modified-sort="1711313132761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="634">
+<div class="quarto-post image-right" data-index="1" data-categories="model" data-listing-date-sort="1710979200000" data-listing-file-modified-sort="1711316917436" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="634">
 <div class="thumbnail">
 <p><a href="./posts/240321_lifecycle/index.html" class="no-external"></a></p><a href="./posts/240321_lifecycle/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\240321_lifecycle\index_files\figure-html\unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts/240321_lifecycle/index_files/figure-html/unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
 </a><p><a href="./posts/240321_lifecycle/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -349,6 +349,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kazuyanagimoto\.github\.io\/quarto-research-blog\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -383,7 +401,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
