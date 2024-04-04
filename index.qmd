@@ -1,5 +1,5 @@
 ---
-title: "Research as a Blog"
+title: "Researching as if to Blog"
 listing:
   contents: posts
   sort: "date desc"
