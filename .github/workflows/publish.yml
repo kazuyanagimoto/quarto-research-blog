@@ -28,7 +28,7 @@ jobs:
           aws-region: us-west-2
 
       - name: S3 sync
-        working-directory: docs
+        working-directory: _site
         run: aws s3 sync . s3://quarto-research-blog --delete
       
       - name: Publish to GitHub Pages

@@ -49,9 +49,13 @@ po/*~
 rsconnect/
 
 # Data
-data/
+data/*
+!data/.gitkeep
 
 # Quarto
 _site/
 .quarto/
 /.quarto/
+
+# Targets
+_targets.yaml

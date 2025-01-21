@@ -5,18 +5,41 @@ date: 2024-03-21
 categories: [model]
 ---
 
+```{r}
+#| label: setup
+#| include: false
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.height = (6 * 0.618),
+  out.width = "80%",
+  fig.align = "center",
+  fig.retina = 3,
+  collapse = TRUE
+)
+```
 
 
 ```{r}
+#| label: library-data
 #| include: false
-library(here)
+
+library(targets)
 library(tidyverse)
 library(Rtauchen)
-source(here("code", "modules", "graphics.R"))
 
 library(Rcpp)
 library(RcppThread)
-sourceCpp(here("posts/240321_lifecycle/model.cpp"))
+sourceCpp(here::here("posts", "240321_lifecycle", "model.cpp"))
+
+tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+tar_load(c(accident_bike))
+invisible(list2env(tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
 ```
 
 ## Model
@@ -37,73 +60,71 @@ $$
 
 
 ```{r}
+#| label: model-parameters
 # Grid for x
-nx            = 100
-xmin          = 0.1 
-xmax          = 4.0 
+nx = 100
+xmin = 0.1
+xmax = 4.0
 
 x_grid = seq(from = xmin, to = xmax, by = (xmax - xmin) / (nx - 1))
 
 # Grid for e: parameters for Tauchen
-ne            = 15
-ssigma_eps    = 0.02058
-llambda_eps   = 0.99
-m             = 1.5 
+ne = 15
+ssigma_eps = 0.02058
+llambda_eps = 0.99
+m = 1.5
 
 P = Rtauchen(ne, ssigma_eps, llambda_eps, m)
 e_grid = exp(Tgrid(ne, ssigma_eps, llambda_eps, m))
 
 # Utility function
-ssigma        = 2 
-bbeta         = 0.97
-T             = 10
+ssigma = 2
+bbeta = 0.97
+T = 10
 
 # Prices
-r             = 0.07
-w             = 5
-```
-
-```{r}
-# Take care of the array shape
-V <- solve(nx, x_grid, ne, e_grid, P, ssigma, bbeta, T, r, w)
+r = 0.07
+w = 5
 ```
 
 ## Results
 
 ```{r}
-df <- tibble(e = rep(1:ne, T * nx), v = V) |> 
+#| label: figure-value-function
+
+V <- solve(nx, x_grid, ne, e_grid, P, ssigma, bbeta, T, r, w)
+
+tibble(e = rep(1:ne, T * nx), v = V) |>
   mutate(t = (row_number() - 1) %/% (nx * ne) + 1) |>
   arrange(e, t) |>
-  mutate(x = rep(x_grid, T * ne),
-         e = factor(e))
-```
-
-```{r}
-#| classes: preview-image
-df |>
+  mutate(x = rep(x_grid, T * ne), e = factor(e)) |>
   filter(t %in% c(1, 4, 7, 10), e %in% c(1, 8, 15)) |>
-  mutate(lbl_facet = factor(paste0("t = ", t),
-                            levels = c("t = 1", "t = 4", "t = 7", "t = 10"))) |>
+  mutate(
+    lbl_facet = factor(
+      paste0("t = ", t),
+      levels = c("t = 1", "t = 4", "t = 7", "t = 10")
+    )
+  ) |>
   ggplot(aes(x = x, y = v, color = e)) +
   geom_line() +
-  scale_color_discrete(labels = ~latex2exp::TeX(sprintf("$e_{%s}$", .x))) +
-  facet_wrap(~ lbl_facet) +
+  scale_color_viridis_d(
+    option = "rocket",
+    end = 0.85,
+    labels = ~latex2exp::TeX(sprintf("$e_{%s}$", .x))
+  ) +
+  facet_wrap(~lbl_facet) +
   labs(x = "x", y = NULL, title = "Value Function") +
-  theme_notebook() +
-  theme(legend.position = c(0.9, 0.1),
-        panel.grid.major.x = element_blank())
+  theme(legend.position = c(0.9, 0.1), panel.grid.major.x = element_blank())
 ```
 
 ### Simulations
 
 ```{r}
+#| label: compute-simulations
 simulate <- function(ssigma, bbeta) {
   V <- solve(nx, x_grid, ne, e_grid, P, ssigma, bbeta, T, r, w)
-  
-  tibble(ssigma = ssigma,
-         bbeta = bbeta,
-         e = rep(1:ne, T * nx),
-         v = V) |> 
+
+  tibble(ssigma = ssigma, bbeta = bbeta, e = rep(1:ne, T * nx), v = V) |>
     mutate(t = (row_number() - 1) %/% (nx * ne) + 1) |>
     arrange(e, t) |>
     mutate(x = rep(x_grid, T * ne))
@@ -118,12 +139,12 @@ df_sim <- map2(exgrid$Var1, exgrid$Var2, simulate) |>
   filter(e %in% c(1, 8, 15)) |>
   mutate(lbl = recode_factor(e, `1` = "e₁", `8` = "e₈", `15` = "e₁₅"))
 
-```
-```{r}
 ojs_define(data = df_sim)
 ```
 
 ```{ojs}
+//| label: input-parameters
+//| echo: false
 //| panel: input
 viewof t = Inputs.range(
   [1, 10], 
@@ -140,12 +161,16 @@ viewof bbeta = Inputs.range(
 ```
 
 ```{ojs}
+//| label: filter-simulations
+//| echo: false
 filtered = transpose(data).filter(function(sim) {
 	return sim.ssigma == ssigma && sim.bbeta == bbeta && sim.t == t
 })
 ```
 
 ```{ojs}
+//| label: plot-simulations
+//| echo: false
 Plot.plot({
 	marginLeft: 50,
 	height: 400,

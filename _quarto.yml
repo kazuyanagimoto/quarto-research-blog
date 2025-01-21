@@ -1,9 +1,7 @@
 project:
   type: website
-  output-dir: docs
   preview: 
-    port: 5556
-    browser: true
+    port: 3333
     watch-inputs: true
     navigate: true
 

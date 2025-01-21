@@ -1,0 +1,14 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+dir_raw_accident_bike|stem|7c14aa98c0884d75|afc2ace78732e6f3|c235cb250f693149|-1357108469||t20109.8981547271s|s138b|138|qs|local|vector|||4.753||
+raw_accident_bike|stem|02f95bd2d01043dc|fa0baab33e3d0d4c|ef97271d195b4641|1182251923||t20109.904462013s|s5128096b|5128096|qs|local|vector|||0.804|One or more parsing issues, call problems on your data frame for details,e.g.  dat  vroom...  problemsdat|
+accident_bike|stem|6eed760b76a08db4|846c20852d00a2e0|ad20dc24be9e5590|1372222003||t20109.9200088027s|s4501290b|4501290|qs|local|vector|||0.767||
+fns_graphics|stem|acd90c8927c98ca6|112f0e791562f939|0ec3c9de5e195fe6|-1063777921||t20109.9372683937s|s6770b|6770|qs|local|vector|||0.164||
+object|object|9deb418257538bba
+here_rel|function|c5fa528ca034d75b
+.Random.seed|object|d02463f92c5c50b3
+download_accident_bike|function|3ba0fecd19daeef4
+load_accident_bike|function|6d58cca7f4d8d203
+scale_fill_gender|function|bd2cad1f751898d3
+clean_accident_bike|function|85ef53bb57b832a9
+theme_proj|function|0b7a6421d90a00bf
+website|stem|9538db378dddd644|9495198f86e652ce|ec1fe8356cc9a60d|-385122080|_site*index.qmd*posts/240321_lifecycle/index.qmd*posts/240324_accident_bike/index.qmd*_quarto.yml|t20109.939760879s|s20473039b|20473039|file|local|vector|||14.342||
