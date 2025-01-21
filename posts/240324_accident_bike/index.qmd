@@ -17,30 +17,49 @@ at CEMFI in January 2022. You can find the slides and the materials in the
 
 :::
 
+```{r}
+#| label: setup
+#| include: false
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.height = (6 * 0.618),
+  out.width = "80%",
+  fig.align = "center",
+  fig.retina = 3,
+  collapse = TRUE
+)
+```
+
 
 ```{r}
-library(here)
+#| label: library-data
+#| include: false
 library(tidyverse)
 library(fixest)
-library(kableExtra)
+library(tinytable)
 library(modelsummary)
-source(here("code", "modules", "graphics.R"))
+library(targets)
 
-accident_bike <- arrow::read_parquet(here("data", "cleaned", "accident_bike.parquet")) |>
-  filter(!is.na(type_person), !is.na(gender))
+tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+tar_load(c(accident_bike))
+invisible(list2env(tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
 ```
 
 ```{r}
-#| classes: preview-image
+#| label: figure-num-accidents
 accident_bike |>
   ggplot(aes(x = fct_rev(type_person), fill = fct_rev(gender))) +
   geom_bar(position = "dodge") +
-  scale_fill_manual(values = c(color_accent, color_base)) +
   coord_flip() +
+  scale_fill_gender() +
   labs(x = NULL, y = NULL, fill = NULL, title = "Number of Accidents") +
-  theme_notebook() +
-  theme(legend.position = c(0.85, 0.1),
-        panel.grid.major.y = element_blank()) +
+  theme(legend.position = c(0.85, 0.1), panel.grid.major.y = element_blank()) +
   guides(fill = guide_legend(reverse = TRUE))
 ```
 
@@ -48,37 +67,80 @@ accident_bike |>
 ## Logit Regression of Hospitalization and Death
 
 ```{r}
+#| label: table-logit-hospital-death
 models <- list(
-    "(1)" = feglm(is_hospitalized ~ type_person + positive_alcohol + positive_drug | age_c + gender,
-                family = binomial(logit), data = accident_bike),
-    "(2)" = feglm(is_hospitalized ~ type_person + positive_alcohol + positive_drug | age_c + gender + type_vehicle,
-                family = binomial(logit), data = accident_bike),
-    "(3)" = feglm(is_hospitalized ~ type_person + positive_alcohol + positive_drug | age_c + gender + type_vehicle + weather,
-                family = binomial(logit), data = accident_bike),
-    "(4)" = feglm(is_died ~ type_person + positive_alcohol + positive_drug | age_c + gender,
-                family = binomial(logit), data = accident_bike),
-    "(5)" = feglm(is_died ~ type_person + positive_alcohol + positive_drug | age_c + gender + type_vehicle,
-                family = binomial(logit), data = accident_bike),
-    "(6)" = feglm(is_died ~ type_person + positive_alcohol + positive_drug | age_c + gender + type_vehicle + weather,
-                family = binomial(logit), data = accident_bike)
+  "(1)" = feglm(
+    is_hospitalized ~
+      type_person + positive_alcohol + positive_drug | age_c + gender,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(2)" = feglm(
+    is_hospitalized ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(3)" = feglm(
+    is_hospitalized ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle + weather,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(4)" = feglm(
+    is_died ~ type_person + positive_alcohol + positive_drug | age_c + gender,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(5)" = feglm(
+    is_died ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(6)" = feglm(
+    is_died ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle + weather,
+    family = binomial(logit),
+    data = accident_bike
+  )
 )
 
-cm  <-  c(
-    "type_personPassenger" = "Passenger",
-    "type_personPedestrian" = "Pedestrian",
-    "positive_alcoholTRUE" = "Positive Alcohol"
+cm <- c(
+  "type_personPassenger" = "Passenger",
+  "type_personPedestrian" = "Pedestrian",
+  "positive_alcoholTRUE" = "Positive Alcohol"
 )
 
 gm <- tibble(
-    raw = c("nobs", "FE: age_c", "FE: gender", "FE: type_vehicle", "FE: weather"),
-    clean = c("Observations", "FE: Age Group", "FE: Gender", "FE: Type of Vehicle", "FE: Weather"),
-    fmt = c(0, 0, 0, 0, 0)
+  raw = c("nobs", "FE: age_c", "FE: gender", "FE: type_vehicle", "FE: weather"),
+  clean = c(
+    "Observations",
+    "FE: Age Group",
+    "FE: Gender",
+    "FE: Type of Vehicle",
+    "FE: Weather"
+  ),
+  fmt = c(0, 0, 0, 0, 0)
 )
 
-modelsummary(models,
+modelsummary(
+  models,
   stars = c("+" = .1, "*" = .05, "**" = .01),
   coef_map = cm,
-  gof_map = gm) |>
-  add_header_above(c(" ", "Hospitalization" = 3, "Died within 24 hours" = 3)) |>
-  row_spec(7, hline_after = TRUE)
+  gof_map = gm
+) |>
+  group_tt(j = list("Hospitalization" = 2:4, "Died within 24 hours" = 5:7))
 ```

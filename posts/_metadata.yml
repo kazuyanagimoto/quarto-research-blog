@@ -3,10 +3,10 @@ title-block-banner: true
 last-updated: last-modified
 
 execute:
-  echo: false
   warning: false
   message: false
 
 format:
   html:
     code-tools: true
+    code-fold: true
