@@ -17,36 +17,23 @@ at CEMFI in January 2022. You can find the slides and the materials in the
 
 :::
 
-```{r}
-#| label: setup
-#| include: false
-knitr::opts_chunk$set(
-  fig.width = 6,
-  fig.height = (6 * 0.618),
-  out.width = "80%",
-  fig.align = "center",
-  fig.retina = 3,
-  collapse = TRUE
-)
-```
-
 
 ```{r}
 #| label: library-data
 #| include: false
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 library(fixest)
 library(tinytable)
 library(modelsummary)
-library(targets)
 
-tar_config_set(
+targets::tar_config_set(
   store = here::here("_targets"),
   script = here::here("_targets.R")
 )
 
-tar_load(c(accident_bike))
-invisible(list2env(tar_read(fns_graphics), .GlobalEnv))
+targets::tar_load(c(accident_bike))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
 
 theme_set(theme_proj())
 ```
@@ -54,7 +41,10 @@ theme_set(theme_proj())
 ```{r}
 #| label: figure-num-accidents
 accident_bike |>
-  ggplot(aes(x = fct_rev(type_person), fill = fct_rev(gender))) +
+  ggplot(aes(
+    x = forcats::fct_rev(type_person),
+    fill = forcats::fct_rev(gender)
+  )) +
   geom_bar(position = "dodge") +
   coord_flip() +
   scale_fill_gender() +

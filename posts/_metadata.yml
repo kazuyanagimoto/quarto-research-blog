@@ -10,3 +10,13 @@ format:
   html:
     code-tools: true
     code-fold: true
+
+knitr:
+  opts_chunk: 
+    fig.width: 6
+    fig.height: 3.708
+    out.width: "80%"
+    fig.align: "center"
+    fig.retina:  3
+    dev: "svg"
+

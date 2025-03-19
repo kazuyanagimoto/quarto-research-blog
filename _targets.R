@@ -30,18 +30,21 @@ tar_source()
 #-------------------------------------------------------------------------------
 
 lst(
-  # Data -----------------------------------------------------------------------
+  # Data ----------------------
   tar_target(
     dir_raw_accident_bike,
     download_accident_bike(here_rel("data", "accident_bike")),
   ),
   tar_target(raw_accident_bike, load_accident_bike(dir_raw_accident_bike)),
   tar_target(accident_bike, clean_accident_bike(raw_accident_bike)),
-  # Graphics -------------------------------------------------------------------
+  # Graphics ------------------
   tar_target(
     fns_graphics,
     lst(theme_proj, scale_fill_gender)
   ),
-  # Website -----------------------------------------------------------------------
+  # Manuscript ----------------
+  tar_quarto(manuscript_book, path = "manuscript", quiet = FALSE),
+  tar_quarto(manuscript, path = "manuscript/main.qmd", quiet = FALSE),
+  # Website -------------------
   tar_quarto(website, path = ".", quiet = FALSE)
 )

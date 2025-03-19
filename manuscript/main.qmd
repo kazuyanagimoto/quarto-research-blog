@@ -1,0 +1,53 @@
+---
+title: Quarto Academic Typst
+subtitle: A Minimalistic Quarto + Typst Template for Academic Writing
+header: Please click [HERE](https://kazuyanagimoto.com/quarto-academic-typst/template-full.pdf) for the latest version.
+author:
+  - name: Kazuharu Yanagimoto
+    email: kazuharu.yanagimoto@cemfi.edu.es
+    orcid: 0009-0007-1967-8304
+    affiliations:
+      - name: CEMFI
+abstract: |
+  {{< lipsum 1 >}}
+thanks: |
+  This template is inspired by Kieran Healy's [LaTeX and Rmd template](https://github.com/kjhealy/latex-custom-kjh) and
+  Andrew Heiss's [Hikmah Quarto template](https://github.com/andrewheiss/hikmah-academic-quarto).
+keywords: [Quarto, Typst, format]
+custom-keywords:
+  - name: JEL Codes
+    values: [J16, J22, J31]    
+date: today
+date-format: full
+format:
+  academic-typst:
+    number-sections: true
+    mainfont: "Linux Libertine O"
+    sansfont: "Jost"
+    mathfont: "Libertinus Math"
+    bibliographystyle: "chicago-author-date"
+    keep-typ: false
+    include-in-header:
+        - text: '#import "@preview/mitex:0.2.4": *'
+execute: 
+  freeze: auto
+  echo: false
+  warning: false
+  message: false 
+bibliography: references.bib
+---
+
+{{< include 01-intro.qmd >}}
+{{< include 02-fact.qmd >}}
+{{< include 03-model.qmd >}}
+{{< include 04-result.qmd >}}
+{{< include 05-conclusion.qmd >}}
+
+{{< appendix >}}
+
+{{< include 11-data.qmd >}}
+
+{{< pagebreak >}}
+
+:::{#refs}
+:::

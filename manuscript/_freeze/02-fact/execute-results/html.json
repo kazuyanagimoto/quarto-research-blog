@@ -1,0 +1,17 @@
+{
+  "hash": "a99a6cae99be49985e2ceb39de1e7b2d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "## Facts {#sec-fact}\n\n\n\n\n\n\n\n\n\n\n\n### Descriptive Analysis\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![**Number of Accidents**. The figure shows the number of accidents by type of person and](02-fact_files/figure-html/fig-num-accidents-1.svg){#fig-num-accidents fig-align='center' width=90%}\n:::\n:::\n",
+    "supporting": [
+      "02-fact_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

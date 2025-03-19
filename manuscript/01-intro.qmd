@@ -1,0 +1,18 @@
+# Introduction {#sec-intro}
+
+```{r}
+#| label: setup-intro
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c())
+
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+theme_set(theme_proj())
+```

@@ -1,0 +1,43 @@
+## Facts {#sec-fact}
+
+```{r}
+#| label: library-data
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(fixest)
+library(tinytable)
+library(modelsummary)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(accident_bike))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
+```
+
+### Descriptive Analysis
+
+```{r}
+#| label: fig-num-accidents
+#| fig-cap: "**Number of Accidents**. The figure shows the number of accidents by type of person and"
+accident_bike |>
+  ggplot(aes(
+    x = forcats::fct_rev(type_person),
+    fill = forcats::fct_rev(gender)
+  )) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  scale_fill_gender() +
+  labs(x = NULL, y = NULL, fill = NULL) +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.85, 0.1),
+    panel.grid.major.y = element_blank()
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
+```

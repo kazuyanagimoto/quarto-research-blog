@@ -1,0 +1,17 @@
+{
+  "hash": "e49ea230f33ef9910a79fa970e89879c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Introduction {#sec-intro}\n\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n:::",
+    "supporting": [
+      "01-intro_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
