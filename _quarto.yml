@@ -1,5 +1,12 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "!manuscript/"
+  resources:
+    - manuscript/_book/
+    - manuscript/main.pdf
+
   preview: 
     port: 3333
     watch-inputs: true
@@ -8,8 +15,10 @@ project:
 website:
   title: "Quarto Research Blog"
   favicon: favicon.svg
-  navbar:
+  navbar:      
     right:
+      - text: Manuscript
+        href: manuscript/main.pdf
       - icon: github
         href: https://github.com/kazuyanagimoto/quarto-research-blog
 format:
@@ -17,3 +26,11 @@ format:
     theme:
       - cosmo
       - custom.scss
+
+knitr:
+  opts_chunk: 
+    fig.align: center
+    fig.retina: 3
+    fig.width: 6
+    fig.height: 3.708
+    dev: svg

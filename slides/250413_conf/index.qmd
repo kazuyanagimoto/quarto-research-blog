@@ -1,0 +1,218 @@
+---
+title: Quarto Clean Theme
+subtitle: A Minimalistic Theme for Quarto + Typst + Touying
+date: today
+date-format: long
+image: static/img/thumbnail.svg
+author:
+  - name: Kazuharu Yanagimoto
+    orcid: 0009-0007-1967-8304
+    email: kazuharu.yanagimoto@cemfi.edu.es
+    affiliations: CEMFI
+format:
+  clean-typst:
+    bibliographystyle: "chicago-author-date"
+    include-in-header: "custom.typ"
+    commands: [small-cite]
+execute: 
+  echo: false
+  warning: false
+brand:
+  typography: 
+    fonts: 
+      - family: Roboto
+        weight: [light, bold]
+        source: google
+bibliography: ../../references.bib
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(fixest)
+library(tinytable)
+library(modelsummary)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(accident_bike))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+options(tinytable_quarto_figure = TRUE)
+
+theme_set(theme_proj(size_base = 20))
+```
+
+## Number of Traffic Accidents
+
+```{r}
+#| label: figure-num-accidents
+accident_bike |>
+  ggplot(aes(
+    x = forcats::fct_rev(type_person),
+    fill = forcats::fct_rev(gender)
+  )) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  scale_fill_manual(values = c(color_accent, color_base)) +
+  labs(x = NULL, y = NULL, fill = NULL) +
+  theme(legend.position = c(0.85, 0.1), panel.grid.major.y = element_blank()) +
+  guides(fill = guide_legend(reverse = TRUE))
+```
+
+- Driver is the most common type of person involved in traffic accidents
+
+## Logit Regression of Hospitalization and Death
+
+```{r}
+#| label: table-logit-hospital-death
+models <- list(
+  "(1)" = feglm(
+    is_hospitalized ~
+      type_person + positive_alcohol + positive_drug | age_c + gender,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(2)" = feglm(
+    is_hospitalized ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(3)" = feglm(
+    is_hospitalized ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle + weather,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(4)" = feglm(
+    is_died ~ type_person + positive_alcohol + positive_drug | age_c + gender,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(5)" = feglm(
+    is_died ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle,
+    family = binomial(logit),
+    data = accident_bike
+  ),
+  "(6)" = feglm(
+    is_died ~
+      type_person +
+        positive_alcohol +
+        positive_drug |
+        age_c + gender + type_vehicle + weather,
+    family = binomial(logit),
+    data = accident_bike
+  )
+)
+
+cm <- c(
+  "type_personPassenger" = "Passenger",
+  "type_personPedestrian" = "Pedestrian",
+  "positive_alcoholTRUE" = "Positive Alcohol"
+)
+
+gm <- tibble(
+  raw = c("nobs", "FE: age_c", "FE: gender", "FE: type_vehicle", "FE: weather"),
+  clean = c(
+    "Observations",
+    "FE: Age Group",
+    "FE: Gender",
+    "FE: Type of Vehicle",
+    "FE: Weather"
+  ),
+  fmt = c(0, 0, 0, 0, 0)
+)
+
+modelsummary(
+  models,
+  stars = c("+" = .1, "*" = .05, "**" = .01),
+  coef_map = cm,
+  gof_map = gm
+) |>
+  group_tt(j = list("Hospitalization" = 2:4, "Died within 24 hours" = 5:7))
+```
+
+# Model
+
+```{r}
+#| label: setup-model
+dir <- here::here("posts", "250413_aiyagari_model")
+
+demand_supply <- readr::read_csv(
+  file.path(dir, "demand_supply.csv"),
+  show_col_types = FALSE
+)
+eq <- yaml::read_yaml(file.path(dir, "equilibrium.yaml"))
+```
+
+## @aiyagari1994
+
+**Preference**
+
+$$
+u(c) = \frac{c^{1-\gamma}}{1-\gamma}
+$$
+
+**Berman Equation**
+
+$$
+V(a, l) = \max_{c, a'} (c) + \beta \mathbb{E}[V(a', l') | l]
+$$
+
+subject to
+
+$$
+c + a' = (1+r)a + wl
+$$
+
+## Demand and Supply of Capital
+
+```{r}
+#| label: figure-demand-supply
+
+demand_supply |>
+  ggplot(aes(x = K, y = r, color = label)) +
+  geom_line() +
+  annotate(
+    "text",
+    x = 11,
+    y = 0.045,
+    label = "Supply",
+    color = color_base,
+    size = 5,
+  ) +
+  annotate(
+    "text",
+    x = 11,
+    y = -0.005,
+    label = "Demand",
+    color = color_accent,
+    size = 5,
+  ) +
+  scale_color_manual(values = c(color_accent, color_base)) +
+  labs(x = "Capital (K)", y = "Interest Rate (r)") +
+  theme(legend.position = "none")
+```
+
+- The equilibrium is determined by the intersection of the demand and supply curves
+- The equilibrium interest rate is `r sprintf("%.3f", eq$r)` and the equilibrium capital is `r sprintf("%.2f", eq$K)`.
+
+## References
+
+:::{ref}
+:::

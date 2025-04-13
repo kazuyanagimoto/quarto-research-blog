@@ -1,0 +1,47 @@
+project:
+  type: book
+
+book:
+  title: A Quantitative Model of Non-Marriage and Fertility
+  subtitle: Bargaining over Leisure
+  author:
+    - name: Kazuharu Yanagimoto
+      email: kazuharu.yanagimoto@cemfi.edu.es
+      orcid: 0009-0007-1967-8304
+      affiliations:
+      - name: CEMFI
+  date: last_update
+  date-format: full
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - 02-fact.qmd
+    - 03-model.qmd
+    - 04-result.qmd
+    - 05-conclusion.qmd
+    - references.qmd
+  appendices:
+    - 11-data.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+
+knitr:
+  opts_chunk: 
+    fig.align: center
+    fig.retina: 3
+    fig.width: 6
+    fig.height: 3
+    out.width: 90%
+    collapse: true
+    dev: svg
+
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
+  message: false

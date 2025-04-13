@@ -1,7 +1,7 @@
 theme_proj <- function(
   font_title = "Roboto Condensed",
   font_text = "Roboto Condensed Light",
-  size_base = 20
+  size_base = 11
 ) {
   ggplot2::theme_minimal(base_family = font_text, base_size = size_base) +
     ggplot2::theme(
@@ -26,7 +26,7 @@ theme_proj <- function(
       strip.text = ggplot2::element_text(
         size = size_base * 0.9,
         hjust = 0,
-        family = font_text,
+        family = font_title,
         face = "bold"
       ),
       strip.background = ggplot2::element_rect(fill = "#ffffff", color = NA),
@@ -53,6 +53,9 @@ theme_proj <- function(
     )
 }
 
+color_base <- "#107895"
+color_accent <- "#9a2515"
+
 scale_fill_gender <- function(...) {
-  scale_fill_manual(values = c("#009F8C", "#B75C9D"), ...)
+  scale_fill_manual(values = c(color_base, color_accent), ...)
 }

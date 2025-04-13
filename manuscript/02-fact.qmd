@@ -1,0 +1,88 @@
+# Facts {#sec-fact}
+
+```{r}
+#| label: setup-fact
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(fixest)
+library(tinytable)
+library(modelsummary)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(num_accident, logit_hospital_death))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
+```
+
+## Descriptive Analysis
+
+@fig-num-accidents shows the number of accidents by type of person and gender. Drivers are the most common type of person involved in accidents, followed by passengers and pedestrians. The number of accidents involving male drivers is `r format(num_accident$n[1], big.mark = ",")` and larger than female drivers `r format(num_accident$n[2], big.mark = ",")`.
+
+```{r}
+#| label: fig-num-accidents
+#| fig-cap: "**Number of Accidents**. The figure shows the number of accidents by type of person and gender. Data includes traffic accidents in Madrid from 2019 to 2023."
+
+num_accident |>
+  ggplot(aes(
+    x = forcats::fct_rev(type_person),
+    y = n,
+    fill = forcats::fct_rev(gender)
+  )) +
+  geom_col(position = "dodge") +
+  coord_flip() +
+  scale_fill_manual(values = c(color_accent, color_base)) +
+  labs(x = NULL, y = NULL, fill = NULL) +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.85, 0.1),
+    panel.grid.major.y = element_blank()
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
+```
+
+## Regression Analysis
+
+@tbl-logit-hospital-death shows blah, blah, blah.
+
+```{r}
+#| label: tbl-logit-hospital-death
+#| tbl-cap: Logit Regression of Hospitalization and Death
+
+cm <- c(
+  "type_personPassenger" = "Passenger",
+  "type_personPedestrian" = "Pedestrian",
+  "positive_alcoholTRUE" = "Positive Alcohol"
+)
+
+gm <- tibble(
+  raw = c("nobs", "FE: age_c", "FE: gender", "FE: type_vehicle", "FE: weather"),
+  clean = c(
+    "Observations",
+    "FE: Age Group",
+    "FE: Gender",
+    "FE: Type of Vehicle",
+    "FE: Weather"
+  ),
+  fmt = c(0, 0, 0, 0, 0)
+)
+
+notes <- "Notes: This table summarizes the results of logit regression models for hospitalization and death outcomes. Data includes traffic accidents in Madrid from 2019 to 2023."
+
+ms <- modelsummary(
+  logit_hospital_death,
+  stars = c("+" = .1, "*" = .05, "**" = .01),
+  coef_map = cm,
+  gof_map = gm,
+  notes = notes
+)
+
+ms |>
+  style_tt("notes", fontsize = 0.8) |>
+  group_tt(j = list("Hospitalization" = 2:4, "Died within 24 hours" = 5:7))
+```

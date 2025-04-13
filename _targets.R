@@ -4,14 +4,8 @@ suppressPackageStartupMessages(library(dplyr))
 
 options(
   tidyverse.quiet = TRUE,
-  dplyr.summarise.inform = FALSE
-)
-
-tar_option_set(
-  packages = c("tidyverse"),
-  format = "qs",
-  workspace_on_error = TRUE,
-  workspaces = c()
+  dplyr.summarise.inform = FALSE,
+  readr.show_col_types = FALSE
 )
 
 # here::here() returns an absolute path, which then gets stored in tar_meta and
@@ -29,19 +23,22 @@ tar_source()
 # Main Pipeline
 #-------------------------------------------------------------------------------
 
-lst(
-  # Data -----------------------------------------------------------------------
-  tar_target(
-    dir_raw_accident_bike,
-    download_accident_bike(here_rel("data", "accident_bike")),
-  ),
-  tar_target(raw_accident_bike, load_accident_bike(dir_raw_accident_bike)),
-  tar_target(accident_bike, clean_accident_bike(raw_accident_bike)),
-  # Graphics -------------------------------------------------------------------
-  tar_target(
-    fns_graphics,
-    lst(theme_proj, scale_fill_gender)
-  ),
-  # Website -----------------------------------------------------------------------
-  tar_quarto(website, path = ".", quiet = FALSE)
+tar_plan(
+  # Data Preparation ----------
+  data,
+  # Analysis ------------------
+  fact,
+  model,
+  # Graphics ------------------
+  fns_graphics = lst(theme_proj, color_base, color_accent, scale_fill_gender),
+  # Manuscript ----------------
+  tar_quarto(manuscript_book, path = "manuscript", quiet = FALSE),
+  tar_quarto(manuscript, path = "manuscript/main.qmd", quiet = FALSE),
+  # Website -------------------
+  tar_quarto(
+    website,
+    path = ".",
+    quiet = FALSE,
+    extra_files = here_rel("manuscript", "main.pdf")
+  )
 )

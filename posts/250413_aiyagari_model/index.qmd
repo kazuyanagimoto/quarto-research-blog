@@ -1,0 +1,59 @@
+---
+title: Aiyagari Model
+author: Kazuharu Yanagimoto
+date: 2025-04-13
+categories: [model]
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(dplyr)
+library(ggplot2)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(accident_bike))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
+
+dir <- here::here("posts", "250413_aiyagari_model")
+
+demand_supply <- readr::read_csv(
+  file.path(dir, "demand_supply.csv"),
+  show_col_types = FALSE
+)
+eq <- yaml::read_yaml(file.path(dir, "equilibrium.yaml"))
+
+```
+
+```{r}
+#| label: figure-demand-supply
+
+demand_supply |>
+  ggplot(aes(x = K, y = r, color = label)) +
+  geom_line() +
+  annotate(
+    "text",
+    x = 11,
+    y = 0.045,
+    label = "Supply",
+    color = color_base,
+    size = 5,
+  ) +
+  annotate(
+    "text",
+    x = 11,
+    y = -0.005,
+    label = "Demand",
+    color = color_accent,
+    size = 5,
+  ) +
+  scale_color_manual(values = c(color_accent, color_base)) +
+  labs(x = "Capital (K)", y = "Interest Rate (r)") +
+  theme(legend.position = "none")
+```

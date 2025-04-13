@@ -1,0 +1,17 @@
+{
+  "hash": "7e5e830b0d03afff7cc12cf7d5fbc5cc",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Esimation Results {#sec-results}\n\n\n\n\n\n\n\n\n\n\n\n@fig-demand-supply shows the demand and supply curves for the interest rate $r$ and capital $K$. The equilibrium is determined by the intersection of the two curves. The equilibrium interest rate is 0.032 and the equilibrium capital is 6.96.\n\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![**Demand and Supply**. The figure shows the demand and supply curves for the interest rate $r$ and capital $K$.](04-result_files/figure-html/fig-demand-supply-1.svg){#fig-demand-supply fig-align='center' width=90%}\n:::\n:::",
+    "supporting": [
+      "04-result_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

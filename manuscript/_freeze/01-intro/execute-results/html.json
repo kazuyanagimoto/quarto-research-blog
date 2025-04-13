@@ -1,0 +1,17 @@
+{
+  "hash": "df2bca8dcba41e2a3b0db11c9cd6f7bd",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Introduction {#sec-intro}\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n:::\n\n{{< lipsum 3 >}}\n\n\n\n\n\n\n@sec-fact shows descriptive statistics of the data. @sec-model presents the model and @sec-results shows the estimation results. @sec-conclusion concludes the paper.",
+    "supporting": [
+      "01-intro_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

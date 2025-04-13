@@ -1,0 +1,86 @@
+# Model {#sec-model}
+
+```{r}
+#| label: setup-model
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(tinytable)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(parameters))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
+options(tinytable_html_mathjax = TRUE)
+```
+
+@aiyagari1994 introduced a model of the economy with heterogenous agents and incomplete markets. The model is a discrete-time, infinite-horizon model with stochastic labor productivity.
+
+## Model Setup
+
+The model is a discrete-time, infinite-horizon model with stochastic labor productivity. The economy consists of a continuum of agents with different levels of capital and labor productivity. Each agent chooses how much capital to accumulate in order to maximize their lifetime utility.
+
+The utility function is given by:
+
+$$
+u(c) = \frac{c^{1-\gamma} - 1}{1-\gamma}.
+$$
+
+The production function is defined as a Cobb-Douglas function:
+
+$$
+F(K, L) = K^\alpha L^{1-\alpha}.
+$$
+
+The log labor productivity $l_t$ follows an AR(1) process:
+
+$$
+l_t = \rho l_{t-1} + \epsilon_t, \quad \epsilon_t \sim N(0, \sigma^2).
+$$
+
+ABBREVIATED
+
+
+## Calibration
+
+Standard values in the literature are used for the calibration. @tbl-parameters shows the parameters used in the model.
+
+```{r}
+#| label: tbl-parameters
+#| tbl-cap: Model Parameters
+tibble(
+  Parameter = c(
+    "$\\gamma$",
+    "$\\beta$",
+    "$\\delta$",
+    "$\\alpha$",
+    "$b$",
+    "$\\rho$",
+    "$\\sigma$"
+  ),
+  Value = c(
+    parameters$gamma,
+    parameters$beta,
+    parameters$delta,
+    parameters$alpha,
+    parameters$b,
+    parameters$rho,
+    parameters$sigma
+  ),
+  Description = c(
+    "Coefficient of relative risk aversion",
+    "Discount factor",
+    "Depreciation rate",
+    "Capital share in output",
+    "Upper bound of debt",
+    "Persistence of labor productivity",
+    "Standard deviation of labor productivity shock"
+  )
+) |>
+  tt()
+```

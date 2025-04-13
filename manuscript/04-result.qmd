@@ -1,0 +1,49 @@
+# Esimation Results {#sec-results}
+
+```{r}
+#| label: setup-results
+#| include: false
+library(dplyr)
+library(ggplot2)
+
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(demand_supply, equilibrium))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
+```
+
+@fig-demand-supply shows the demand and supply curves for the interest rate $r$ and capital $K$. The equilibrium is determined by the intersection of the two curves. The equilibrium interest rate is `r sprintf("%.3f", equilibrium$r)` and the equilibrium capital is `r sprintf("%.2f", equilibrium$K)`.
+
+
+```{r}
+#| label: fig-demand-supply
+#| fig-cap: "**Demand and Supply**. The figure shows the demand and supply curves for the interest rate $r$ and capital $K$."
+
+demand_supply |>
+  ggplot(aes(x = K, y = r, color = label)) +
+  geom_line() +
+  annotate(
+    "text",
+    x = 11,
+    y = 0.045,
+    label = "Supply",
+    color = color_base,
+    size = 3,
+  ) +
+  annotate(
+    "text",
+    x = 11,
+    y = -0.005,
+    label = "Demand",
+    color = color_accent,
+    size = 3,
+  ) +
+  scale_color_manual(values = c(color_accent, color_base)) +
+  labs(x = "Capital (K)", y = "Interest Rate (r)") +
+  theme(legend.position = "none")
+```
