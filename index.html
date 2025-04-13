@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6beba3bed89c13d246c0038d52ff128a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a579d7f8b922713c92f2a4d0a0af8994.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -148,6 +148,10 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./manuscript/main.pdf"> 
+<span class="menu-text">Manuscript</span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/kazuyanagimoto/quarto-research-blog"> <i class="bi bi-github" role="img">
 </i> 
@@ -196,10 +200,54 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="ZGVzY3JpcHRpdmUlMkN0cmFmZmljJTIwYWNjaWRlbnRz" data-listing-date-sort="1711238400000" data-listing-file-modified-sort="1737499008185" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569">
+<div class="quarto-post image-right" data-index="0" data-categories="bW9kZWw=" data-listing-date-sort="1744502400000" data-listing-file-modified-sort="1744561625092" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="145">
+<div class="thumbnail">
+<p><a href="./posts/250413_aiyagari_model/index.html" class="no-external"></a></p><a href="./posts/250413_aiyagari_model/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/250413_aiyagari_model/index_files/figure-html/figure-demand-supply-1.svg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/250413_aiyagari_model/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/250413_aiyagari_model/index.html" class="no-external">Aiyagari Model</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/250413_aiyagari_model/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('bW9kZWw='); return false;">
+model
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/250413_aiyagari_model/index.html" class="no-external">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">demand_supply <span class="sc">|&gt;</span></span>
+<span id="cb1-2">  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> K, <span class="at">y =</span> r, <span class="at">color =</span> label)) <span class="sc">+</span></span>
+<span id="cb1-3">  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb1-4">  <span class="fu">annotate</span>(</span>
+<span id="cb1-5">    <span class="st">"text"</span>,</span>
+<span id="cb1-6">    <span class="at">x =</span> <span class="dv">11</span>,</span>
+<span id="cb1-7">    <span class="at">y =</span> <span class="fl">0.045</span>,</span>
+<span id="cb1-8">    <span class="at">label =</span> <span class="st">"Supply"</span>,</span>
+<span id="cb1-9">    <span class="at">color =</span> colo…</span><span id="cb1-10"><span class="at"></span><span class="dv"></span></span><span id="cb1-11"><span class="sc"></span></span><span id="cb1-12"><span class="fu"></span></span><span id="cb1-13"><span class="st"></span></span><span id="cb1-14"><span class="at"></span><span class="dv"></span></span><span id="cb1-15"><span class="at"></span><span class="sc"></span><span class="fl"></span></span><span id="cb1-16"><span class="at"></span><span class="st"></span></span><span id="cb1-17"><span class="at"></span></span><span id="cb1-18"><span class="at"></span><span class="dv"></span></span><span id="cb1-19"><span class="sc"></span></span><span id="cb1-20"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="sc"></span></span><span id="cb1-21"><span class="fu"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb1-22"><span class="fu"></span><span class="at"></span><span class="st"></span></span></code></pre></div></details><div class="cell-output-display"><div class="quarto-figure quarto-figure-center"><figure class="figure"><p></p></figure></div></div></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/250413_aiyagari_model/index.html" class="no-external">
+<div class="listing-date">
+Apr 13, 2025
+</div>
+<div class="listing-author">
+Kazuharu Yanagimoto
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="ZGVzY3JpcHRpdmUlMkN0cmFmZmljJTIwYWNjaWRlbnRz" data-listing-date-sort="1711238400000" data-listing-file-modified-sort="1744561625091" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="548">
 <div class="thumbnail">
 <p><a href="./posts/240324_accident_bike/index.html" class="no-external"></a></p><a href="./posts/240324_accident_bike/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/240324_accident_bike/index_files/figure-html/figure-num-accidents-1.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts/240324_accident_bike/index_files/figure-html/figure-num-accidents-1.svg"  class="thumbnail-image card-img"/></p>
 </a><p><a href="./posts/240324_accident_bike/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -225,39 +273,6 @@ traffic accidents
 <a href="./posts/240324_accident_bike/index.html" class="no-external">
 <div class="listing-date">
 Mar 24, 2024
-</div>
-<div class="listing-author">
-Kazuharu Yanagimoto
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bW9kZWw=" data-listing-date-sort="1710979200000" data-listing-file-modified-sort="1737499008185" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="536">
-<div class="thumbnail">
-<p><a href="./posts/240321_lifecycle/index.html" class="no-external"></a></p><a href="./posts/240321_lifecycle/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/240321_lifecycle/index_files/figure-html/figure-value-function-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/240321_lifecycle/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/240321_lifecycle/index.html" class="no-external">A Simple Life Cycle Model</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/240321_lifecycle/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bW9kZWw='); return false;">
-model
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/240321_lifecycle/index.html" class="no-external">This note examines the model of Parallel Computing by Rcpp.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/240321_lifecycle/index.html" class="no-external">
-<div class="listing-date">
-Mar 21, 2024
 </div>
 <div class="listing-author">
 Kazuharu Yanagimoto
