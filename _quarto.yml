@@ -27,6 +27,9 @@ format:
       - cosmo
       - custom.scss
 
+execute: 
+  freeze: auto
+
 knitr:
   opts_chunk: 
     fig.align: center
