@@ -16,3 +16,7 @@ targets::tar_load(c())
 invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
 theme_set(theme_proj())
 ```
+
+{{< lipsum 3 >}}
+
+@sec-fact shows descriptive statistics of the data. @sec-model presents the model and @sec-results shows the estimation results. @sec-conclusion concludes the paper.

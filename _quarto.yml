@@ -15,11 +15,10 @@ project:
 website:
   title: "Quarto Research Blog"
   favicon: favicon.svg
-  navbar:
-    left:
+  navbar:      
+    right:
       - text: Manuscript
         href: manuscript/main.pdf
-    right:
       - icon: github
         href: https://github.com/kazuyanagimoto/quarto-research-blog
 format:
@@ -27,3 +26,11 @@ format:
     theme:
       - cosmo
       - custom.scss
+
+knitr:
+  opts_chunk: 
+    fig.align: center
+    fig.retina: 3
+    fig.width: 6
+    fig.height: 3.708
+    dev: svg

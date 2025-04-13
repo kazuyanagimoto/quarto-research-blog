@@ -1,0 +1,3 @@
+# Data {#sec-app-data}
+
+I use the "Accidentes de tráfico de la ciuda de Madrid" dataset from the Portal de datos abiertos del Ayundamiento de Madrid. Data is available at [https://datos.madrid.es/](https://datos.madrid.es/).

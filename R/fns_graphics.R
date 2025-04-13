@@ -53,6 +53,9 @@ theme_proj <- function(
     )
 }
 
+color_base <- "#107895"
+color_accent <- "#9a2515"
+
 scale_fill_gender <- function(...) {
-  scale_fill_manual(values = c("#009F8C", "#B75C9D"), ...)
+  scale_fill_manual(values = c(color_base, color_accent), ...)
 }

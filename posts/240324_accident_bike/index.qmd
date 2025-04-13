@@ -19,7 +19,7 @@ at CEMFI in January 2022. You can find the slides and the materials in the
 
 
 ```{r}
-#| label: library-data
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)

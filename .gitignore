@@ -59,3 +59,9 @@ _site/
 
 # Targets
 _targets.yaml
+
+# Other
+.DS_Store
+
+# Julia
+Manifest.toml

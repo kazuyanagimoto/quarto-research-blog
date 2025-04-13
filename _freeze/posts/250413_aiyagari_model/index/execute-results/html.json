@@ -1,0 +1,17 @@
+{
+  "hash": "1573f4caba9209e33d60a6533e85c138",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Aiyagari Model\nauthor: Kazuharu Yanagimoto\ndate: 2025-04-13\ncategories: [model]\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\ndemand_supply |>\n  ggplot(aes(x = K, y = r, color = label)) +\n  geom_line() +\n  annotate(\n    \"text\",\n    x = 11,\n    y = 0.045,\n    label = \"Supply\",\n    color = color_base,\n    size = 5,\n  ) +\n  annotate(\n    \"text\",\n    x = 11,\n    y = -0.005,\n    label = \"Demand\",\n    color = color_accent,\n    size = 5,\n  ) +\n  scale_color_manual(values = c(color_accent, color_base)) +\n  labs(x = \"Capital (K)\", y = \"Interest Rate (r)\") +\n  theme(legend.position = \"none\")\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/figure-demand-supply-1.svg){fig-align='center' width=80%}\n:::\n:::",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
