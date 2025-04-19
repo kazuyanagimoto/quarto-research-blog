@@ -17,6 +17,20 @@ here_rel <- function(...) {
   fs::path_rel(here::here(...))
 }
 
+build_graph <- function() {
+  out_file <- here_rel("static", "mermaid_workflow.md")
+  output <- tar_mermaid(
+    targets_only = TRUE,
+    outdated = FALSE,
+    legend = FALSE,
+    color = FALSE,
+  )
+
+  cat(output, file = out_file, sep = "\n")
+
+  return(out_file)
+}
+
 tar_source()
 
 #-------------------------------------------------------------------------------

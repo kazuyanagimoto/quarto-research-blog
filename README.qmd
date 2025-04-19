@@ -1,0 +1,52 @@
+---
+format: gfm
+execute: 
+  echo: false
+---
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+```{r}
+#| label: setup
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+```
+
+# Quarto Research Blog
+
+This is an example of a research blog using the [Quarto](https://quarto.org).
+You can find a [website](https://kazuyanagimoto.com/quarto-research-blog/) and
+a password-protected [website](https://kazuyanagimoto.com/quarto-research-blog/).
+
+- username: `abcd`
+- password: `1234`
+
+### Explanation
+
+- [My blog](https://kazuyanagimoto.com/blog/2024/04/05/)
+- [Zenn](https://zenn.dev/nicetak/articles/quarto-research-blog) (in Japanese)
+
+
+## Workflow
+
+```{.r}
+targets::tar_make()
+```
+
+```{r}
+#| label: mermaid-workflow
+#| output: asis
+cat("``` mermaid\n")
+cat(
+  targets::tar_mermaid(
+    targets_only = TRUE,
+    outdated = FALSE,
+    legend = FALSE,
+    color = FALSE,
+  ),
+  sep = "\n"
+)
+cat("\n```")
+```
