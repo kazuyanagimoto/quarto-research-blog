@@ -4,26 +4,23 @@
 
 # Quarto Research Blog
 
-This is an example of a research blog using the
-[Quarto](https://quarto.org). You can find a
-[website](https://kazuyanagimoto.com/quarto-research-blog/) and a
-password-protected
-[website](https://kazuyanagimoto.com/quarto-research-blog/).
+## Research Wokflow
 
-- username: `abcd`
-- password: `1234`
+This is an example of a research workflow using Quarto and
+[`targets`](https://books.ropensci.org/targets/).
 
 ### Explanation
 
-- [My blog](https://kazuyanagimoto.com/blog/2024/04/05/)
-- [Zenn](https://zenn.dev/nicetak/articles/quarto-research-blog) (in
+- [Zenn](https://zenn.dev/nicetak/articles/workflow-research-2025) (in
   Japanese)
 
-## Workflow
+### Replication
 
-``` r
-targets::tar_make()
-```
+1.  Install R, Julia, and Quarto
+2.  Set Julia path in .Renviron `PATH_JULIA="/path/to/julia"`
+3.  Install `renv` in R console
+4.  Run `renv::restore()` to install packages
+5.  Run `targets::tar_make()` to run the workflow
 
 ``` mermaid
 graph LR
@@ -61,3 +58,20 @@ graph LR
     x5b3deba9281c9212(["fns_graphics"]):::skipped --> x5a3744590d99f661(["website"]):::skipped
   end
 ```
+
+## Quarto Research Blog
+
+This is also an example of a research blog using the
+[Quarto](https://quarto.org). You can find a
+[website](https://kazuyanagimoto.com/quarto-research-blog/) and a
+password-protected
+[website](https://kazuyanagimoto.com/quarto-research-blog/).
+
+- username: `abcd`
+- password: `1234`
+
+### Explanation
+
+- [My blog](https://kazuyanagimoto.com/blog/2024/04/05/)
+- [Zenn](https://zenn.dev/nicetak/articles/quarto-research-blog) (in
+  Japanese)
