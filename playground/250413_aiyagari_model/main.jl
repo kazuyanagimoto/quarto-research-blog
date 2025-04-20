@@ -2,7 +2,7 @@ using DataFrames, CSV
 using YAML
 using ProjectRoot
 
-dir = @projectroot "posts/250413_aiyagari_model"
+dir = @projectroot "playground/250413_aiyagari_model"
 
 include("model.jl")
 using .My

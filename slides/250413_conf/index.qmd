@@ -151,7 +151,7 @@ modelsummary(
 
 ```{r}
 #| label: setup-model
-dir <- here::here("posts", "250413_aiyagari_model")
+dir <- here::here("playground", "250413_aiyagari_model")
 
 demand_supply <- readr::read_csv(
   file.path(dir, "demand_supply.csv"),
