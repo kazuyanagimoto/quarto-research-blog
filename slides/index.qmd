@@ -1,0 +1,11 @@
+---
+title: Presentation
+listing:
+  contents:
+    - "*.qmd"
+  sort: "date desc"
+  type: grid
+  grid-columns: 2
+  fields: ["title", "description", "date", "author", "image"]
+toc: false
+---

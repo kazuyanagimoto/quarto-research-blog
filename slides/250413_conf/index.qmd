@@ -3,12 +3,14 @@ title: Quarto Clean Theme
 subtitle: A Minimalistic Theme for Quarto + Typst + Touying
 date: today
 date-format: long
-image: static/img/thumbnail.svg
+image: thumbnail.svg
 author:
   - name: Kazuharu Yanagimoto
     orcid: 0009-0007-1967-8304
     email: kazuharu.yanagimoto@cemfi.edu.es
     affiliations: CEMFI
+description: |
+  XXXX conference, Madrid, Spain
 format:
   clean-typst:
     bibliographystyle: "chicago-author-date"

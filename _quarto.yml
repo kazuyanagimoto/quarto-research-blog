@@ -18,6 +18,8 @@ website:
   favicon: static/favicon.svg
   navbar:      
     right:
+      - text: Slides
+        href: slides/index.qmd
       - text: Manuscript
         href: manuscript/main.pdf
       - icon: github
