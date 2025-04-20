@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://kazuyanagimoto.github.io/quarto-research-blog/playground/240324_accident_bike/index.html</loc>
-    <lastmod>2025-04-20T10:51:10.177Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kazuyanagimoto.github.io/quarto-research-blog/index.html</loc>
-    <lastmod>2025-04-20T10:51:10.174Z</lastmod>
+    <loc>https://kazuyanagimoto.github.io/quarto-research-blog/slides/index.html</loc>
+    <lastmod>2025-04-20T11:03:07.520Z</lastmod>
   </url>
   <url>
     <loc>https://kazuyanagimoto.github.io/quarto-research-blog/playground/250413_aiyagari_model/index.html</loc>
-    <lastmod>2025-04-20T10:51:10.177Z</lastmod>
+    <lastmod>2025-04-20T11:03:07.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kazuyanagimoto.github.io/quarto-research-blog/index.html</loc>
+    <lastmod>2025-04-20T11:03:07.516Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kazuyanagimoto.github.io/quarto-research-blog/playground/240324_accident_bike/index.html</loc>
+    <lastmod>2025-04-20T11:03:07.518Z</lastmod>
   </url>
 </urlset>

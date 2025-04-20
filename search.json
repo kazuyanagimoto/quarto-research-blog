@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Presentation",
+    "section": "",
+    "text": "Quarto Clean Theme\n\n\nXXXX conference, Madrid, Spain\n\n\n\nKazuharu Yanagimoto\n\n\nApr 20, 2025\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "playground/250413_aiyagari_model/index.html",
+    "href": "playground/250413_aiyagari_model/index.html",
+    "title": "Aiyagari Model",
+    "section": "",
+    "text": "Code\ndemand_supply |&gt;\n  ggplot(aes(x = K, y = r, color = label)) +\n  geom_line() +\n  annotate(\n    \"text\",\n    x = 11,\n    y = 0.045,\n    label = \"Supply\",\n    color = color_base,\n    size = 5,\n  ) +\n  annotate(\n    \"text\",\n    x = 11,\n    y = -0.005,\n    label = \"Demand\",\n    color = color_accent,\n    size = 5,\n  ) +\n  scale_color_manual(values = c(color_accent, color_base)) +\n  labs(x = \"Capital (K)\", y = \"Interest Rate (r)\") +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Researching as if to Blog",
+    "section": "",
+    "text": "Aiyagari Model\n\n\n\n\n\n\nmodel\n\n\n\n\n\n\n\n\n\nApr 13, 2025\n\n\nKazuharu Yanagimoto\n\n\n\n\n\n\n\n\n\n\n\n\nMadrid Traffic Accidents Dataset\n\n\n\n\n\n\ndescriptive\n\n\ntraffic accidents\n\n\n\n\n\n\n\n\n\nMar 24, 2024\n\n\nKazuharu Yanagimoto\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "playground/240324_accident_bike/index.html",
     "href": "playground/240324_accident_bike/index.html",
     "title": "Madrid Traffic Accidents Dataset",
@@ -12,19 +33,5 @@
     "title": "Madrid Traffic Accidents Dataset",
     "section": "Logit Regression of Hospitalization and Death",
     "text": "Logit Regression of Hospitalization and Death\n\n\nCode\nmodels &lt;- list(\n  \"(1)\" = feglm(\n    is_hospitalized ~\n      type_person + positive_alcohol + positive_drug | age_c + gender,\n    family = binomial(logit),\n    data = accident_bike\n  ),\n  \"(2)\" = feglm(\n    is_hospitalized ~\n      type_person +\n        positive_alcohol +\n        positive_drug |\n        age_c + gender + type_vehicle,\n    family = binomial(logit),\n    data = accident_bike\n  ),\n  \"(3)\" = feglm(\n    is_hospitalized ~\n      type_person +\n        positive_alcohol +\n        positive_drug |\n        age_c + gender + type_vehicle + weather,\n    family = binomial(logit),\n    data = accident_bike\n  ),\n  \"(4)\" = feglm(\n    is_died ~ type_person + positive_alcohol + positive_drug | age_c + gender,\n    family = binomial(logit),\n    data = accident_bike\n  ),\n  \"(5)\" = feglm(\n    is_died ~\n      type_person +\n        positive_alcohol +\n        positive_drug |\n        age_c + gender + type_vehicle,\n    family = binomial(logit),\n    data = accident_bike\n  ),\n  \"(6)\" = feglm(\n    is_died ~\n      type_person +\n        positive_alcohol +\n        positive_drug |\n        age_c + gender + type_vehicle + weather,\n    family = binomial(logit),\n    data = accident_bike\n  )\n)\n\ncm &lt;- c(\n  \"type_personPassenger\" = \"Passenger\",\n  \"type_personPedestrian\" = \"Pedestrian\",\n  \"positive_alcoholTRUE\" = \"Positive Alcohol\"\n)\n\ngm &lt;- tibble(\n  raw = c(\"nobs\", \"FE: age_c\", \"FE: gender\", \"FE: type_vehicle\", \"FE: weather\"),\n  clean = c(\n    \"Observations\",\n    \"FE: Age Group\",\n    \"FE: Gender\",\n    \"FE: Type of Vehicle\",\n    \"FE: Weather\"\n  ),\n  fmt = c(0, 0, 0, 0, 0)\n)\n\nmodelsummary(\n  models,\n  stars = c(\"+\" = .1, \"*\" = .05, \"**\" = .01),\n  coef_map = cm,\n  gof_map = gm\n) |&gt;\n  group_tt(j = list(\"Hospitalization\" = 2:4, \"Died within 24 hours\" = 5:7))\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nHospitalization\nDied within 24 hours\n\n        \n              \n                 \n                (1)\n                (2)\n                (3)\n                (4)\n                (5)\n                (6)\n              \n        \n        + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01\n        \n                \n                  Passenger\n                  0.026\n                  0.501**\n                  0.475**\n                  -1.697**\n                  -1.445*\n                  -1.440*\n                \n                \n                  \n                  (0.100)\n                  (0.069)\n                  (0.068)\n                  (0.616)\n                  (0.631)\n                  (0.631)\n                \n                \n                  Pedestrian\n                  2.117**\n                  2.381**\n                  2.298**\n                  2.190**\n                  2.326**\n                  2.327**\n                \n                \n                  \n                  (0.114)\n                  (0.061)\n                  (0.058)\n                  (0.260)\n                  (0.248)\n                  (0.246)\n                \n                \n                  Positive Alcohol\n                  0.007\n                  0.355**\n                  0.381**\n                  -13.685**\n                  -13.421**\n                  -13.460**\n                \n                \n                  \n                  (0.072)\n                  (0.081)\n                  (0.081)\n                  (0.059)\n                  (0.055)\n                  (0.054)\n                \n                \n                  Observations\n                  197477\n                  197369\n                  176133\n                  118462\n                  116344\n                  112659\n                \n                \n                  FE: Age Group\n                  X\n                  X\n                  X\n                  X\n                  X\n                  X\n                \n                \n                  FE: Gender\n                  X\n                  X\n                  X\n                  X\n                  X\n                  X\n                \n                \n                  FE: Type of Vehicle\n                  \n                  X\n                  X\n                  \n                  X\n                  X\n                \n                \n                  FE: Weather\n                  \n                  \n                  X\n                  \n                  \n                  X"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Researching as if to Blog",
-    "section": "",
-    "text": "Aiyagari Model\n\n\n\n\n\n\nmodel\n\n\n\n\n\n\n\n\n\nApr 13, 2025\n\n\nKazuharu Yanagimoto\n\n\n\n\n\n\n\n\n\n\n\n\nMadrid Traffic Accidents Dataset\n\n\n\n\n\n\ndescriptive\n\n\ntraffic accidents\n\n\n\n\n\n\n\n\n\nMar 24, 2024\n\n\nKazuharu Yanagimoto\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "playground/250413_aiyagari_model/index.html",
-    "href": "playground/250413_aiyagari_model/index.html",
-    "title": "Aiyagari Model",
-    "section": "",
-    "text": "Code\ndemand_supply |&gt;\n  ggplot(aes(x = K, y = r, color = label)) +\n  geom_line() +\n  annotate(\n    \"text\",\n    x = 11,\n    y = 0.045,\n    label = \"Supply\",\n    color = color_base,\n    size = 5,\n  ) +\n  annotate(\n    \"text\",\n    x = 11,\n    y = -0.005,\n    label = \"Demand\",\n    color = color_accent,\n    size = 5,\n  ) +\n  scale_color_manual(values = c(color_accent, color_base)) +\n  labs(x = \"Capital (K)\", y = \"Interest Rate (r)\") +\n  theme(legend.position = \"none\")"
   }
 ]

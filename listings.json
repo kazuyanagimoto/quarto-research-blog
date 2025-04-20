@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/slides/index.html",
+    "items": [
+      "/slides/250413_conf/index.pdf"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/playground/250413_aiyagari_model/index.html",
