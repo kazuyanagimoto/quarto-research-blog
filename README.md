@@ -6,11 +6,14 @@
 
 ## Research Wokflow
 
-This is an example of a research workflow using Quarto and
+This is an example of a research workflow using
+[Quarto](https://quarto.org) and
 [`targets`](https://books.ropensci.org/targets/).
 
 ### Explanation
 
+- [My
+  blog](https://kazuyanagimoto.com/blog/2025/0426_research_workflow/)
 - [Zenn](https://zenn.dev/nicetak/articles/workflow-research-2025) (in
   Japanese)
 
